@@ -1,0 +1,7 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+    <qresource prefix="/themes">
+        <file alias="default.json">../src/themes/default.json</file>
+        <file alias="xddcc.json">../src/themes/xddcc.json</file>
+    </qresource>
+</RCC>

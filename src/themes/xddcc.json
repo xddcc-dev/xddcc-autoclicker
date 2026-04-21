@@ -1,0 +1,34 @@
+{
+    "name": "XDDCC",
+    "author": "XDDCC",
+    "version": "1.0",
+    "description": "A simple clean autoclicker",
+    "starburst": true,
+    "colors": {
+        "background": "#1a0a0a",
+        "surface": "#2a1010",
+        "primary": "#ff2222",
+        "primaryHover": "#cc1111",
+        "accent": "#3388ff",
+        "text": "#ffffff",
+        "textMuted": "#ffaaaa",
+        "border": "#661111",
+        "success": "#3388ff",
+        "danger": "#ff2222",
+        "warning": "#ff9900"
+    },
+    "gradients": {
+        "header": ["#cc0000", "#0044cc"],
+        "button": ["#ff2222", "#cc1111"],
+        "active": ["#3388ff", "#2266cc"]
+    },
+    "borderRadius": 12,
+    "fontFamily": "Arial Black",
+    "fontSize": 13,
+    "animations": {
+        "enabled": true,
+        "duration": 160,
+        "hoverGlow": true,
+        "pulseOnClick": true
+    }
+}

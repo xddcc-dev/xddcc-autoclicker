@@ -1,0 +1,43 @@
+{
+    "name": "Default",
+    "author": "XDDCC",
+    "version": "1.0",
+    "description": "default ui",
+    "starburst": false,
+    "colors": {
+        "background": "#141414",
+        "surface": "#1e1e1e",
+        "primary": "#ffffff",
+        "primaryHover": "#dddddd",
+        "accent": "#cccccc",
+        "text": "#f0f0f0",
+        "textMuted": "#777777",
+        "border": "#3a3a3a",
+        "success": "#aaaaaa",
+        "danger": "#cc3333",
+        "warning": "#ccaa44"
+    },
+    "gradients": {
+        "header": ["#141414", "#1a1a1a"],
+        "button": ["#2a2a2a", "#222222"],
+        "active": ["#444444", "#333333"]
+    },
+    "borderRadius": 3,
+    "fontFamily": "Segoe UI",
+    "fontSize": 13,
+    "animations": {
+        "enabled": true,
+        "duration": 140,
+        "hoverGlow": false,
+        "pulseOnClick": false
+    },
+    "particles": {
+        "enabled": true,
+        "color": "#ffffff",
+        "count": 35,
+        "speed": 0.45,
+        "size": 2.2,
+        "lifetime": 5.0,
+        "spawnRate": 1
+    }
+}
