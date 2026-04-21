@@ -22,7 +22,9 @@ This is a customizable autoclicker offering tons of settings and features, with 
 These are known issues that either I or **YOU** can help fix:
 
 - Click sound not working  
-- Top tab position works, but other tab positions are broken  
+- Top tab position works, but other tab positions are broken
+
+- Linux issue: Hotkey problems (Will be fixing soon)
 
 ---
 
