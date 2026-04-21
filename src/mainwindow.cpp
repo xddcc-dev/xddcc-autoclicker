@@ -99,7 +99,7 @@ void MainWindow::buildUi()
     m_header = buildHeader();
     m_outerLayout->addWidget(m_header);
 
-    // body = tab bar + stack (for top position cuz tab bar is above stack)
+    // body: tab bar + stack (for top position, tab bar is above stack)
     m_bodyWidget = new QWidget();
     m_bodyLayout = new QHBoxLayout(m_bodyWidget);
     m_bodyLayout->setContentsMargins(0, 0, 0, 0);
@@ -132,14 +132,14 @@ void MainWindow::buildUi()
     m_outerLayout->addWidget(m_bottomBar);
 }
 
-// header
+// --- Header ---
 
 QWidget* MainWindow::buildHeader()
 {
     auto *w = new QWidget();
     w->setObjectName("header");
     w->setFixedHeight(44);
-    // (note) caller assigns return value to m_header
+    // note: caller assigns return value to m_header
     auto *l = new QHBoxLayout(w);
     l->setContentsMargins(16, 0, 8, 0);
     l->setSpacing(8);
@@ -178,7 +178,7 @@ QWidget* MainWindow::buildHeader()
     return w;
 }
 
-// tab bar
+// --- Tab bar ---
 
 QWidget* MainWindow::buildTabBar()
 {
@@ -218,7 +218,7 @@ QWidget* MainWindow::buildTabBar()
     return w;
 }
 
-// main page
+// --- Main page ---
 
 QWidget* MainWindow::buildMainPage()
 {
@@ -233,7 +233,7 @@ QWidget* MainWindow::buildMainPage()
     root->setContentsMargins(24, 20, 24, 20);
     root->setSpacing(14);
 
-    // top card, start button + counter
+    // top card — start button + counter
     auto *topCard = new QFrame();
     topCard->setObjectName("card");
     auto *topRow = new QHBoxLayout(topCard);
@@ -403,7 +403,7 @@ QWidget* MainWindow::buildMainPage()
     return scroll;
 }
 
-// themes
+// --- Themes page ---
 
 QWidget* MainWindow::buildThemesPage()
 {
@@ -501,7 +501,7 @@ void MainWindow::refreshThemeGrid()
     grid->setColumnStretch(3, 1);
 }
 
-// about
+// --- About page ---
 
 QWidget* MainWindow::buildAboutPage()
 {
@@ -534,7 +534,7 @@ QWidget* MainWindow::buildAboutPage()
     return page;
 }
 
-// bottom bar
+// --- Bottom bar ---
 
 QWidget* MainWindow::buildBottomBar()
 {
@@ -566,7 +566,7 @@ QWidget* MainWindow::buildBottomBar()
     return bar;
 }
 
-// nav
+// --- Nav / slide transition ---
 
 void MainWindow::updateTabIndicator(int idx, bool animate)
 {
@@ -630,7 +630,7 @@ void MainWindow::onNavClicked(int idx)
     group->start();
 }
 
-// engine
+// --- Engine ---
 
 void MainWindow::toggleClicking()
 {
@@ -675,7 +675,7 @@ void MainWindow::pushEngineSettings()
     }
 }
 
-// signals
+// --- Signals ---
 
 void MainWindow::onStarted()
 {
@@ -780,7 +780,7 @@ void MainWindow::exportTheme()
         QMessageBox::warning(this, "Export", "Failed to save theme.");
 }
 
-// settings stuff
+// --- Settings changes ---
 
 void MainWindow::onSettingsChanged()
 {
@@ -808,8 +808,8 @@ void MainWindow::onSettingsChanged()
 void MainWindow::applyTabPosition(int pos)
 {
     // pos 0 = top (default, already built), 1 = left, 2 = right
-    // for simplicity, just move the tab bar widget in the layout
-    // remove tabBar from outerLayout and re-add in correct position
+    // For simplicity, just move the tab bar widget in the layout.
+    // Remove tabBar from outerLayout and re-add in correct position.
     if (!m_tabBarWidget || !m_bodyWidget || !m_bodyLayout) return;
 
     // clear the body layout
@@ -839,7 +839,7 @@ void MainWindow::applyTabPosition(int pos)
     }
 }
 
-// settings
+// --- Settings persistence ---
 
 void MainWindow::saveSettings()
 {
@@ -931,7 +931,7 @@ void MainWindow::loadSettings()
     }
 }
 
-// config shit
+// --- Config export/import ---
 
 void MainWindow::exportConfig()
 {
@@ -1002,7 +1002,7 @@ void MainWindow::importConfig()
     QMessageBox::information(this, "Import", "Config loaded.");
 }
 
-// spoof poof
+// --- Hide mode ---
 
 void MainWindow::toggleHideMode()
 {
@@ -1014,7 +1014,7 @@ void MainWindow::toggleHideMode()
     if (m_hideMode) {
         ex = (ex | WS_EX_TOOLWINDOW) & ~WS_EX_APPWINDOW;
         SetWindowLongPtr(hwnd, GWL_EXSTYLE, ex);
-        setWindowTitle("System"); // this isnt fooling anybody but whatever
+        setWindowTitle("System");
         ShowWindow(hwnd, SW_HIDE);
         ShowWindow(hwnd, SW_SHOW);
         m_trayIcon->show();
@@ -1029,7 +1029,7 @@ void MainWindow::toggleHideMode()
 #endif
 }
 
-// mouse dragging
+// --- Mouse drag ---
 
 static bool isInteractive(QWidget *w)
 {
@@ -1074,7 +1074,7 @@ void MainWindow::mouseReleaseEvent(QMouseEvent *e)
     QMainWindow::mouseReleaseEvent(e);
 }
 
-// resizeeeeee
+// --- Resize / show events ---
 
 void MainWindow::resizeEvent(QResizeEvent *e)
 {
@@ -1087,19 +1087,19 @@ void MainWindow::showEvent(QShowEvent *e)
 {
     QMainWindow::showEvent(e);
 #ifdef _WIN32
-    // ensure all minimizing stuff
+    // ensure minimize box is set so taskbar button works correctly
     HWND hwnd = (HWND)winId();
     LONG_PTR style = GetWindowLongPtr(hwnd, GWL_STYLE);
     SetWindowLongPtr(hwnd, GWL_STYLE, style | WS_MINIMIZEBOX | WS_SYSMENU);
 #endif
-    // pos indicator
+    // position indicator after window is visible
     QTimer::singleShot(0, this, [this]{ updateTabIndicator(m_stack->currentIndex(), false); });
 }
 
 void MainWindow::changeEvent(QEvent *e)
 {
     if (e->type() == QEvent::WindowStateChange) {
-        // nothing special needed cuz Qt handles it
+        // nothing special needed — Qt handles it
     }
     QMainWindow::changeEvent(e);
 }
@@ -1114,20 +1114,20 @@ void MainWindow::closeEvent(QCloseEvent *e)
 
 // --- Hotkeys ---
 
+#ifdef _WIN32
 static UINT parseHotkey(const QString &s, UINT *mods)
 {
     *mods = 0;
     QString key = s.trimmed().toUpper();
     if (key.isEmpty()) return 0;
-#ifdef _WIN32
     if (key.startsWith("F") && key.size() <= 3) {
         int n = key.mid(1).toInt();
         if (n >= 1 && n <= 24) return VK_F1 + (n - 1);
     }
     if (key.size() == 1) return key.at(0).unicode();
-#endif
     return 0;
 }
+#endif
 
 void MainWindow::registerHotkey()
 {
